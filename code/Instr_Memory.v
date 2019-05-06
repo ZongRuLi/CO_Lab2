@@ -16,6 +16,8 @@ reg    [32-1:0]  Instr_Mem [0:32-1];
 //Main function
 always @(pc_addr_i) begin
 	instr_o = Instr_Mem[pc_addr_i/4];
+	$display("[Instr]==> [Rs = %b, Rt = %b, Rd = %b]",instr_o[25:21],instr_o[20:16],instr_o[15:11]);
+	$display("[Instr]==> Imm = %d",instr_o[15:0]);
 end
     
 //Initial Memory Contents

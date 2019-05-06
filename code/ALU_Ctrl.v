@@ -34,6 +34,7 @@ parameter [6-1:0] FUNC_SRL = 6'b000010;
 parameter [6-1:0] FUNC_NOR = 6'b010101;
 
 always@(*) begin
+//	$display("[ALU_Ctr]==>get ALUop = %b",ALUOp_i);
 	case (ALUOp_i)
 		// R-type
  		ALUOP_RTYPE :begin
@@ -48,8 +49,8 @@ always@(*) begin
 			else if (funct_i == FUNC_SRL	)	ALU_operation = 4'b0100;//?	//4
 			else if (funct_i == FUNC_NOR	) 	ALU_operation = 4'b1101;	//13
 		end
-		ALUOP_ADDI 	:begin 							ALU_operation = 4'b0010; $display("==> Addi alu_op"); end
-		ALUOP_LUI 	:							ALU_operation = 4'b0100;
+		ALUOP_ADDI 	:begin 	ALU_operation = 4'b0010;	$display("[ALU_Ctr]==> Addi alu_op"); end
+		ALUOP_LUI 	:begin	ALU_operation = 4'b0100;	$display("");	end
 	endcase
 	
 	case (funct_i)
@@ -70,11 +71,12 @@ always@(*) begin
 	endcase
 
 	case(FURslt)
-	2'b00:	$display("==> ALU result");
-	2'b01:	$display("==> Shifter result");
-	2'b10:	$display("==> Zero_filled result");
+	2'b00:	$display("[ALU_Ctr]==> ALU result");
+	2'b01:	$display("[ALU_Ctr]==> Shifter result");
+	2'b10:	$display("[ALU_Ctr]==> Zero_filled result");
 	endcase
 end
 
 assign ALU_operation_o = ALU_operation;
+assign FURslt_o = FURslt;
 endmodule

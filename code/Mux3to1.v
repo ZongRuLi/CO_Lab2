@@ -13,11 +13,12 @@ output wire	[size-1:0] data_o;
 /*your code here*/
 assign data_o = select_i[1] ? data2_i : ( select_i[0] ? data1_i : data0_i );
 
-always@(*)begin
+always@(data2_i,data1_i,data0_i)begin
+	//$display("[result]==> select = %d",select_i);
 	case(select_i) 
-		2'b10:	$display("result ALU = %b",data2_i);
-		2'b01:	$display("result Shift = %b",data1_i);
-		2'b00: 	$display("result Zero_filled = %b",data0_i);
+		2'b00:	$display("[result]==> sel=%d ALU= %b",select_i,data_o);
+		2'b01:	$display("[result]==> sel=%d Shift = %b",select_i,data_o);
+		2'b10: 	$display("[result]==> sel=%d Zero_filled = %b",select_i,data_o);
 	endcase
 end
 

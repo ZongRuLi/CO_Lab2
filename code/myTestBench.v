@@ -81,7 +81,7 @@ initial  begin
 
 	// 讀取 測試指令 到 cpu指令記憶體 中
 	$readmemb("CO_P2_test_data1.txt", cpu.IM.Instr_Mem);  //Read instruction from "CO_P2_test_data1.txt" 
-    for(k=0;k<32;k++)
+    for(k=0;k<7;k++)
 		$display("%b",cpu.IM.Instr_Mem[k]);	
 	// 讀取 驗證輸出
 	handle = $fopen("CO_P2_result.txt");
@@ -276,7 +276,7 @@ initial  begin
 end
 
 initial begin
-	$dumpfile("wwwwww.vcd");
+	$dumpfile("www.vcd");
 	$dumpvars;
 	#100000 $finish;
 end

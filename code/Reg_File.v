@@ -39,7 +39,12 @@ always @( negedge rst_n or posedge clk_i  ) begin
 		else 
 		    Reg_File[RDaddr_i] <= Reg_File[RDaddr_i];
 	end
+	$display("\t[Reg File]==>Rs data=%d",RSdata_o);
+	$display("\t[Reg File]==>Rt data=%d",RTdata_o);
+	$display("RegWrite=%d [Reg File]==>Rd data=%d",RegWrite_i,RDdata_i);
+	
 end
+
 
 endmodule     
 

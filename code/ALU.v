@@ -24,13 +24,14 @@ assign overflow = (result[31]^result[30]);
 
 always @(ALU_operation_i,aluSrc1,aluSrc2) begin
 	case (ALU_operation_i)
-		0:result <= aluSrc1 & aluSrc2;			// and
-		1:result <= aluSrc1 | aluSrc2;			// or
-		2:result <= aluSrc1 + aluSrc2;			// add
-		6:result <= aluSrc1 - aluSrc2;			// sub
-		7:result <= aluSrc1 < aluSrc2 ? 1 : 0;	// slt
-		12:result <= ~(aluSrc1 | aluSrc2);		// nor
+		0:result = aluSrc1 & aluSrc2;			// and
+		1:result = aluSrc1 | aluSrc2;			// or
+		2:result = aluSrc1 + aluSrc2;			// add
+		6:result = aluSrc1 - aluSrc2;			// sub
+		7:result = aluSrc1 < aluSrc2 ? 1 : 0;	// slt
+		12:result = ~(aluSrc1 | aluSrc2);		// nor
 		default:result <= 0;
 	endcase
+	$display("[ALU]==> A= %d, B= %d, result= %d",aluSrc1,aluSrc2,result);
 end
 endmodule

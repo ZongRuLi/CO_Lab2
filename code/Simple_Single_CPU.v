@@ -23,7 +23,7 @@ wire	[2-1:0]	select_slt;
 //MUX1
 wire	[5-1:0]	rdaddr;
 //Register File
-wire	[31:0]	Result;
+wire	[31:0]	Result;	//RDdata
 wire	[31:0]	rsdata;
 wire	[31:0]	rtdata;
 //Sign extent

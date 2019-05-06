@@ -41,7 +41,7 @@ always@(*) begin
 			op 	= ALUOP_RTYPE;
 			src = 0;		// 0 => Reg
 			Dst = 1;		// 1 => Rd
-			$display("==> Rtype OPcode");
+			$display("[Decoder]==> Rtype OPcode");
 		end
 		// ADDI OP = 6'b110111
 		OP_ADDI: begin
@@ -49,7 +49,7 @@ always@(*) begin
 			op = ALUOP_ADDI;
 			src = 1;		// 1 => Imm
 			Dst = 0;		// 0 => Rt
-			$display("==> Addi OPcode");
+			$display("[Decoder]==> Addi OPcode");
 		end
 		// LUI OP = b'b110000
 		OP_LUI: begin
@@ -57,14 +57,16 @@ always@(*) begin
 			op = ALUOP_LUI;
 			src = 1;		// 1 => Imm
 			Dst = 0;		// 0 => Rt
-			$display("==> Lui OPcode");
+			$display("[Decoder]==> Lui OPcode");
 		end
 	endcase
+	$display("[Decoder]==> aluop = %b",ALUOp_o);
 end
 
-assign RegWrite = write;
-assign ALU_Op_o = op;
+assign RegWrite_o = write;
+assign ALUOp_o = op;
 assign ALUSrc_o = src;
 assign RegDst = Dst;
+
 
 endmodule
