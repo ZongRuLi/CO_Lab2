@@ -18,3 +18,33 @@ integer i;
 assign result = leftRight ? (sftSrc<<shamt) : (sftSrc>>shamt);
 
 endmodule
+
+
+/*
+module test;
+
+reg [32-1:0]	in;
+reg	[5-1:0]		shamt;
+wire			leftright;
+wire [32-1:0]	out;
+integer 		i;
+
+Shifter sss(out,leftright,shamt,in);
+
+assign leftright = 1;
+
+initial begin
+	$dumpfile("wwww.vcd");
+	$dumpvars;
+	in = 32'hffffffff;
+	shamt = 0;
+	for( i=1;i<=32;i++)begin
+		#3	shamt = i;
+	end
+
+end
+
+initial #100 $finish;
+
+endmodule
+*/
