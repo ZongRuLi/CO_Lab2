@@ -41,6 +41,7 @@ always@(*) begin
 			op 	= ALUOP_RTYPE;
 			src = 0;		// 0 => Reg
 			Dst = 1;		// 1 => Rd
+			$display("==> Rtype OPcode");
 		end
 		// ADDI OP = 6'b110111
 		OP_ADDI: begin
@@ -48,6 +49,7 @@ always@(*) begin
 			op = ALUOP_ADDI;
 			src = 1;		// 1 => Imm
 			Dst = 0;		// 0 => Rt
+			$display("==> Addi OPcode");
 		end
 		// LUI OP = b'b110000
 		OP_LUI: begin
@@ -55,6 +57,7 @@ always@(*) begin
 			op = ALUOP_LUI;
 			src = 1;		// 1 => Imm
 			Dst = 0;		// 0 => Rt
+			$display("==> Lui OPcode");
 		end
 	endcase
 end

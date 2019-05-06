@@ -48,6 +48,7 @@ reg signed [31:0] register_file[31:0];	//
 reg [31:0] pc;				//pc指標
 reg [4:0]  rs,rt,rd;			//
 integer i;				//
+integer k;
 
 always #(`CYCLE_TIME/2) CLK = ~CLK;	//產生CLK時脈
 
@@ -80,20 +81,21 @@ initial  begin
 
 	// 讀取 測試指令 到 cpu指令記憶體 中
 	$readmemb("CO_P2_test_data1.txt", cpu.IM.Instr_Mem);  //Read instruction from "CO_P2_test_data1.txt" 
-    	
+    for(k=0;k<32;k++)
+		$display("%b",cpu.IM.Instr_Mem[k]);	
 	// 讀取 驗證輸出
 	handle = $fopen("CO_P2_result.txt");
 	
 	CLK = 0;
-    	RST = 0;
+    RST = 0;
 	count = 0;
 	end_count=25;
 	instruction = 32'd0;
-    	@(negedge CLK);
+    @(negedge CLK);
 	RST = 1;
 	pc = 32'd0;
 	
-	for(;count != `END_COUNT;)begin
+	for(k=0;count != `END_COUNT;k++)begin
 		instruction = cpu.IM.Instr_Mem[ pc>>2 ];
 		pc = pc + 32'd4;
 		
@@ -112,13 +114,13 @@ initial  begin
 						register_file[rd] = $signed(register_file[rs]) - $signed(register_file[rt]);
 					end
 					FUNC_AND:begin
-						register_file[rd] = register_file[rs] & register_file[rt] ;
+						register_file[rd] = register_file[rs] & register_file[rt];
 					end
 					FUNC_OR:begin
-						register_file[rd] = register_file[rs] | register_file[rt] ;
+						register_file[rd] = register_file[rs] | register_file[rt];
 					end
 					FUNC_SLT:begin
-						register_file[rd] = (register_file[rs] < register_file[rt]) ?(32'd1):(32'd0) ;
+						register_file[rd] = (register_file[rs] < register_file[rt]) ?(32'd1):(32'd0);
 					end
 					FUNC_SLLV:begin
 						register_file[rd] = register_file[rt] << register_file[rs];
@@ -171,6 +173,7 @@ initial  begin
 			end
 		endcase
 	
+		$display("the %d th OPcode = %b",k,instruction[31:26]);
 	
 		
 		@(negedge CLK);
@@ -270,6 +273,12 @@ initial  begin
 			  cpu.RF.Reg_File[10],cpu.RF.Reg_File[11], cpu.RF.Reg_File[12], cpu.RF.Reg_File[13], cpu.RF.Reg_File[14]
 			);
     $fclose(handle); $stop;
+end
+
+initial begin
+	$dumpfile("wwwwww.vcd");
+	$dumpvars;
+	#100000 $finish;
 end
 
 endmodule

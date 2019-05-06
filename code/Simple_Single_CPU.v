@@ -23,7 +23,7 @@ wire	[2-1:0]	select_slt;
 //MUX1
 wire	[5-1:0]	rdaddr;
 //Register File
-wire	[31:0]	rddata;
+wire	[31:0]	Result;
 wire	[31:0]	rsdata;
 wire	[31:0]	rtdata;
 //Sign extent
@@ -39,7 +39,7 @@ wire	alu_overflow;
 //Shifter
 wire	[31:0]	shift_result;
 //MUX3
-wire	[31:0]	Result;	
+//wire	[31:0]	Result;	
 
 //initial
 assign const_32d4 = 32'd4;
@@ -76,7 +76,7 @@ Reg_File RF(
         .RSaddr_i(instr[25:21]) ,  
         .RTaddr_i(instr[20:16]) ,  
         .RDaddr_i(rdaddr) ,  
-        .RDdata_i(rddata)  , 
+        .RDdata_i(Result)  , 
         .RegWrite_i(en_write),
         .RSdata_o(rsdata) ,  
         .RTdata_o(rtdata)   

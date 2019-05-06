@@ -37,7 +37,7 @@ always@(*) begin
 	case (ALUOp_i)
 		// R-type
  		ALUOP_RTYPE :begin
-		 		if (funct_i == FUNC_ADD 	) 	ALU_operation = 4'b0010;	//2
+		 		if (funct_i == FUNC_ADD 	) 	ALU_operation = 4'b0010;	//2 
 			else if (funct_i == FUNC_SUB	) 	ALU_operation = 4'b0110;	//6
 			else if (funct_i == FUNC_AND	) 	ALU_operation = 4'b0000;	//0
 			else if (funct_i == FUNC_OR  	) 	ALU_operation = 4'b0001;	//1
@@ -48,7 +48,7 @@ always@(*) begin
 			else if (funct_i == FUNC_SRL	)	ALU_operation = 4'b0100;//?	//4
 			else if (funct_i == FUNC_NOR	) 	ALU_operation = 4'b1101;	//13
 		end
-		ALUOP_ADDI 	: 							ALU_operation = 4'b0010;
+		ALUOP_ADDI 	:begin 							ALU_operation = 4'b0010; $display("==> Addi alu_op"); end
 		ALUOP_LUI 	:							ALU_operation = 4'b0100;
 	endcase
 	
@@ -67,6 +67,12 @@ always@(*) begin
 	case(ALUOp_i)
 		ALUOP_ADDI:	FURslt = 2'b00;
 		ALUOP_LUI:	FURslt = 2'b10;
+	endcase
+
+	case(FURslt)
+	2'b00:	$display("==> ALU result");
+	2'b01:	$display("==> Shifter result");
+	2'b10:	$display("==> Zero_filled result");
 	endcase
 end
 
