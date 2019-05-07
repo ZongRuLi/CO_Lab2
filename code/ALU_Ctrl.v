@@ -38,25 +38,19 @@ always@(*) begin
 	case (ALUOp_i)
 		// R-type
  		ALUOP_RTYPE :begin
-		 		if (funct_i == FUNC_ADD 	) 	ALU_operation = 4'b0010;	//2 
+		 		if (funct_i == FUNC_ADD 	) 	ALU_operation = 4'b0010;	//2
 			else if (funct_i == FUNC_SUB	) 	ALU_operation = 4'b0110;	//6
 			else if (funct_i == FUNC_AND	) 	ALU_operation = 4'b0000;	//0
 			else if (funct_i == FUNC_OR  	) 	ALU_operation = 4'b0001;	//1
-			else if (funct_i == FUNC_SLT	) begin	
-					ALU_operation = 4'b0111;	//7
-					$display("[ALU_Ctr]==> SLT aluop= %b",ALU_operation);
-			end
-			//else if (funct_i == FUNC_SLLV	) 	ALU_operation = 4'b1111;//?	//15
+			else if (funct_i == FUNC_SLT	) 	ALU_operation = 4'b0111;	//7
+			else if (funct_i == FUNC_SLLV	) 	ALU_operation = 4'b1111;//?	//15
 			else if (funct_i == FUNC_SLL	) 	ALU_operation = 4'b0101;	//5
-			//else if (funct_i == FUNC_SRLV	) 	ALU_operation = 4'b1110;	//14
+			else if (funct_i == FUNC_SRLV	) 	ALU_operation = 4'b1110;	//14
 			else if (funct_i == FUNC_SRL	)	ALU_operation = 4'b0100;//?	//4
-			else if (funct_i == FUNC_NOR	)begin 	
-					ALU_operation = 4'b1100;	//12
-					$display("[ALU_Ctr]==> NOR aluop= %b",ALU_operation);
-			end
+			else if (funct_i == FUNC_NOR	)	ALU_operation = 4'b1100;	//12
 		end
-		ALUOP_ADDI 	:begin 	ALU_operation = 4'b0010;	$display("[ALU_Ctr]==> Addi alu_op"); end
-		ALUOP_LUI 	:begin	ALU_operation = 4'b0100;	$display("");	end
+		ALUOP_ADDI 	:	ALU_operation = 4'b0010;
+		ALUOP_LUI 	:	ALU_operation = 4'b0100;
 	endcase
 	
 	case (funct_i)
@@ -66,21 +60,22 @@ always@(*) begin
 		FUNC_OR :	FURslt = 2'b00;
 		FUNC_NOR:	FURslt = 2'b00;
 		FUNC_SLT:	FURslt = 2'b00;
-		//FUNC_SLLV:	FURslt = 2'b01;
+		FUNC_SLLV:	FURslt = 2'b01;
 		FUNC_SLL:	FURslt = 2'b01;
-		//FUNC_SRLV:	FURslt = 2'b01;
+		FUNC_SRLV:	FURslt = 2'b01;
 		FUNC_SRL:	FURslt = 2'b01;
 	endcase
 	case(ALUOp_i)
 		ALUOP_ADDI:	FURslt = 2'b00;
 		ALUOP_LUI:	FURslt = 2'b10;
 	endcase
-
+/*
 	case(FURslt)
 	2'b00:	$display("[ALU_Ctr]==> ALU result");
 	2'b01:	$display("[ALU_Ctr]==> Shifter result");
 	2'b10:	$display("[ALU_Ctr]==> Zero_filled result");
 	endcase
+*/
 end
 
 assign ALU_operation_o = ALU_operation;

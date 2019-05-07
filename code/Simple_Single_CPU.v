@@ -36,6 +36,8 @@ wire	[31:0]	rtdata_new;
 wire	[31:0]	alu_result;
 wire	alu_zero;
 wire	alu_overflow;
+//Mux2
+wire	[32-1:0] shamtt;
 //Shifter
 wire	[31:0]	shift_result;
 //MUX3
@@ -124,11 +126,18 @@ ALU ALU(
 		.zero(alu_zero),
 		.overflow(alu_overflow)
 	    );
-		
+
+Mux2to1 #(.size(32)) Mux_Shift_Reg(
+        .data0_i({27'd0,instr[10:6]}),	// sll,srl
+        .data1_i(rsdata),				// sllv,srlv
+        .select_i(alu_operation[1]),	//
+        .data_o(shamtt)
+        );
+	
 Shifter shifter( 
-		.result(shift_result), 
-		.leftRight(alu_operation[0]),	// 要再改
-		.shamt(instr[10:6]),
+		.result(shift_result),
+		.leftRight(alu_operation[0]),	//
+		.shamt(shamtt),
 		.sftSrc(rtdata_new) 
 		);
 		

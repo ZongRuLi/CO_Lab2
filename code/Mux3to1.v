@@ -11,12 +11,9 @@ output wire	[size-1:0] data_o;
 
 //Main function
 /*your code here*/
-reg	[size-1:0]	data;
-always@(*)begin
-	data =  select_i[1] ? data2_i : ( select_i[0] ? data1_i : data0_i );
-end
+assign	data_o =  select_i[1] ? data2_i : ( select_i[0] ? data1_i : data0_i );
 
-assign data_o = data;
+/*
 always@(data2_i,data1_i,data0_i)begin
 	//$display("[Mux3]==> data0= %b, data1= %b, data2= %b",data0_i,data1_i,data2_i);
 	case(select_i) 
@@ -25,7 +22,7 @@ always@(data2_i,data1_i,data0_i)begin
 		2'b10: 	$display("[Mux3]==> sel=%d Zero_filled = %d",select_i,data_o);
 	endcase
 end
-
+*/
 endmodule    
 
 /*

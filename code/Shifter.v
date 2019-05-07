@@ -4,7 +4,7 @@ module Shifter( result, leftRight, shamt, sftSrc );
 output	[32-1:0] result;
 
 input			leftRight;
-input	[5-1:0] shamt;
+input	[32-1:0] shamt;
 input	[32-1:0] sftSrc ;
 
 //Internal Signals
@@ -16,7 +16,11 @@ integer i;
 /*your code here*/
 
 assign result = leftRight ? (sftSrc<<shamt) : (sftSrc>>shamt);
-
+/*
+always@(*) begin
+	$display("[Shifter] shamt= %b",shamt);
+end
+*/
 endmodule
 
 

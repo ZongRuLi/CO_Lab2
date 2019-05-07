@@ -12,13 +12,13 @@ output wire	[size-1:0] data_o;
 /*your code here*/
 
 assign	data_o = (select_i) ? data1_i : data0_i;
-
+/*
 always@(*) begin
-	if(size==32) $display("[Mux2]==> Rt data= %d",data_o );
+	if(size==32) $display("[Mux2]==> sel= %d, shamt= %b",select_i,data_o );
 	if(size==5) begin
 		$display("[Mux1]==> Rt= %b, Rd= %b sel=%d ,Waddr=%b",data0_i,data1_i,select_i,data_o);
 	end
 end
-
+*/
 endmodule
     

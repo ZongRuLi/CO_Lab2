@@ -15,7 +15,7 @@ always @(posedge clk_i) begin
 	    pc_out_o <= 0;
 	else
 	    pc_out_o <= pc_in_i;
-	$display("[PC]==> pc= %b",pc_out_o);
+//	$display("[PC]==> pc= %b",pc_out_o);
 end
 
 endmodule

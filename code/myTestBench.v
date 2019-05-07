@@ -80,7 +80,7 @@ end
 initial  begin
 
 	// 讀取 測試指令 到 cpu指令記憶體 中
-	$readmemb("CO_P2_test_data1.txt", cpu.IM.Instr_Mem);  //Read instruction from "CO_P2_test_data1.txt" 
+	$readmemb("CO_P2_test_data4.txt", cpu.IM.Instr_Mem);  //Read instruction from "CO_P2_test_data1.txt" 
     for(k=0;k<7;k++)
 		$display("%b",cpu.IM.Instr_Mem[k]);	
 	// 讀取 驗證輸出
@@ -199,6 +199,8 @@ initial  begin
 		// Check the register file
 		// It should be the same with the register file in the design
 		for(i=0; i<31; i=i+1)begin
+			rt = instruction[20:16];
+			rd = instruction[15:11];
 			if(cpu.RF.Reg_File[i] !== register_file[i])begin
 				$display("");
 				case(instruction[31:26])
@@ -292,18 +294,28 @@ initial  begin
 								$display("CORRECT: NOR  instruction success");
 							end
 						endcase
+						$display("Rd %d = %d",rd,register_file[rd]);
+						$display("Your value is %b ",cpu.RF.Reg_File[rd]);
 					end
 					OP_ADDI:begin
 						$display("CORRECT: ADDI instruction success");
+						$display("Rt %d = %d",rt,register_file[rt]);
+						$display("Your value is %d ",cpu.RF.Reg_File[rt]);
 					end
 					OP_BEQ:begin
 						$display("CORRECT: BEQ  instruction success");
+						$display("Rt %d = %d",rt,register_file[rt]);
+						$display("Your value is %d ",cpu.RF.Reg_File[rt]);
 					end
 					OP_ORI:begin
 						$display("CORRECT: ORI  instruction success");
+						$display("Rt %d = %d",rt,register_file[rt]);
+						$display("Your value is %d ",cpu.RF.Reg_File[rt]);
 					end
 					OP_LUI:begin
 						$display("CORRECT: LUI  instruction success");
+						$display("Rt %d = %d",rt,register_file[rt]);
+						$display("Your value is %b ",cpu.RF.Reg_File[rt]);
 					end
 				endcase
 				$display("");
@@ -331,8 +343,8 @@ initial  begin
 end
 
 initial begin
-	$dumpfile("www.vcd");
-	$dumpvars;
+	//$dumpfile("www.vcd");
+	//$dumpvars;
 	#100000 $finish;
 end
 
