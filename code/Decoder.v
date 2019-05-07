@@ -42,7 +42,7 @@ always@(instr_op_i) begin
 			op 	= ALUOP_RTYPE;
 			src = 0;		// 0 => Reg
 			Dst = 1;		// 1 => Rd
-			$display("[Decoder]==> Rtype OPcode, aluop = %b",ALUOp_o);
+		//	$display("[Decoder]==> Rtype OPcode, aluop = %b",ALUOp_o);
 		end
 		// ADDI OP = 6'b110111
 		OP_ADDI: begin
