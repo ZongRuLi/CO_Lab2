@@ -22,16 +22,16 @@ assign zero = (result==0);
 assign overflow = (result[31]^result[30]);
 //Overflow is true if {Sum[m+1],Sum[m]} = {0,1}, {1,0}
 
-always @(ALU_operation_i,aluSrc1,aluSrc2) begin
+always @(ALU_operation_i,aluSrc1,aluSrc2,result) begin
 	case (ALU_operation_i)
 		0:result = aluSrc1 & aluSrc2;			// and
 		1:result = aluSrc1 | aluSrc2;			// or
 		2:result = aluSrc1 + aluSrc2;			// add
 		6:result = aluSrc1 - aluSrc2;			// sub
-		7:result = aluSrc1 < aluSrc2 ? 1 : 0;	// slt
+		7:result = aluSrc1 < aluSrc2 ? 1 : 0;	// slt 0111
 		12:result = ~(aluSrc1 | aluSrc2);		// nor
 		default:result <= 0;
 	endcase
-	$display("[ALU]==> A= %d, B= %d, result= %d",aluSrc1,aluSrc2,result);
+	$display("[ALU]==> A= %d, B= %d, op= %b, result= %d",aluSrc1,aluSrc2,ALU_operation_i,result);
 end
 endmodule

@@ -39,13 +39,13 @@ always @( negedge rst_n or posedge clk_i  ) begin
 		else 
 		    Reg_File[RDaddr_i] <= Reg_File[RDaddr_i];
 	end
-	$display("\t[Reg File]==>Rs data=%d",RSdata_o);
-	$display("\t[Reg File]==>Rt data=%d",RTdata_o);
-	$display("RegWrite=%d [Reg File]==>Rd data=%d",RegWrite_i,RDdata_i);
 	
+	$display("\t[Reg File]==>Rsdata= %3d, Rtdata= %3d,Rddata= %3d",RSdata_o,RTdata_o,RDdata_i);
 end
-
-
+always@(*)begin
+		$display("\t[Reg File]==> W=%b\tRd data=%3d, Reg[RDaddr]= %3d",
+								RegWrite_i,RDdata_i,Reg_File[RDaddr_i]);
+end
 endmodule     
 
 

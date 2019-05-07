@@ -66,7 +66,6 @@ end
 assign RegWrite_o = write;
 assign ALUOp_o = op;
 assign ALUSrc_o = src;
-assign RegDst = Dst;
-
+assign RegDst_o = Dst;
 
 endmodule

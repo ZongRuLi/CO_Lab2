@@ -136,7 +136,7 @@ Mux3to1 #(.size(32)) RDdata_Source(
 		.data2_i(zero_out),
         .select_i(select_slt),
         .data_o(Result)
-        );			
+        );		
 
 endmodule
 
