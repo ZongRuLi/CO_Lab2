@@ -173,7 +173,7 @@ initial  begin
 			end
 		endcase
 	
-		$display("the %d th OPcode = %b",k,instruction[31:26]);
+		$display(">>>>>>> the %3d th OPcode = %b",k,instruction[31:26]);
 	
 		
 		@(negedge CLK);
@@ -200,6 +200,7 @@ initial  begin
 		// It should be the same with the register file in the design
 		for(i=0; i<31; i=i+1)begin
 			if(cpu.RF.Reg_File[i] !== register_file[i])begin
+				$display("");
 				case(instruction[31:26])
 					OP_RTYPE:begin
 						case(instruction[5:0])
@@ -248,10 +249,64 @@ initial  begin
 						$display("ERROR: LUI  instruction fail");
 					end
 				endcase
+				$display("");
 				$display("Register %d contains wrong answer",i);
 				$display("The correct value is %d ",register_file[i]);
 				$display("Your wrong value is %d ",cpu.RF.Reg_File[i]);
 				$stop;
+			end
+			// 印出正確訊息
+			else if(  i==30 )begin
+				$display("");
+				case(instruction[31:26])
+					OP_RTYPE:begin
+						case(instruction[5:0])
+							FUNC_ADD:begin
+								$display("CORRECT: ADD instruction success");
+							end
+							FUNC_SUB:begin
+								$display("CORRECT: SUB instruction success");
+							end
+							FUNC_AND:begin
+								$display("CORRECT: AND instruction success");
+							end
+							FUNC_OR:begin
+								$display("CORRECT: OR  instruction success");
+							end
+							FUNC_SLT:begin
+								$display("CORRECT: SLT instruction success");
+							end
+							FUNC_SLLV:begin
+								$display("CORRECT: SLLV instruction success");
+							end
+							FUNC_SLL:begin
+								$display("CORRECT: SLL  instruction success");
+							end
+							FUNC_SRLV:begin
+								$display("CORRECT: SRLV instruction success");
+							end
+							FUNC_SRL:begin
+								$display("CORRECT: SRL  instruction success");
+							end
+							FUNC_NOR:begin
+								$display("CORRECT: NOR  instruction success");
+							end
+						endcase
+					end
+					OP_ADDI:begin
+						$display("CORRECT: ADDI instruction success");
+					end
+					OP_BEQ:begin
+						$display("CORRECT: BEQ  instruction success");
+					end
+					OP_ORI:begin
+						$display("CORRECT: ORI  instruction success");
+					end
+					OP_LUI:begin
+						$display("CORRECT: LUI  instruction success");
+					end
+				endcase
+				$display("");
 			end
 		end
 		if(cpu.IM.Instr_Mem[ pc >>2 ] == 32'd0)begin
@@ -262,7 +317,7 @@ initial  begin
 		else begin
 			count = count + 1;
 		end
-	end
+	end	// end of for COUNT 
 	$display("============================================");
 	$display("   Congratulation. You pass  TA's pattern   ");
 	$display("============================================");

@@ -29,7 +29,7 @@ always @(ALU_operation_i,aluSrc1,aluSrc2,result) begin
 		2:result = aluSrc1 + aluSrc2;			// add
 		6:result = aluSrc1 - aluSrc2;			// sub
 		7:result = aluSrc1 < aluSrc2 ? 1 : 0;	// slt 0111
-		12:result = ~(aluSrc1 | aluSrc2);		// nor
+		12:result = ~(aluSrc1 | aluSrc2);		// nor 1101
 		default:result <= 0;
 	endcase
 	$display("[ALU]==> A= %d, B= %d, op= %b, result= %d",aluSrc1,aluSrc2,ALU_operation_i,result);

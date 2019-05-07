@@ -61,7 +61,7 @@ Adder Adder1(
 Instr_Memory IM(
         .pc_addr_i(pc_out),  
 	    .instr_o(instr)    
-	    );
+		);
 
 Mux2to1 #(.size(5)) Mux_Write_Reg(
         .data0_i(instr[20:16]),
@@ -89,7 +89,9 @@ Decoder Decoder(
 	    .ALUSrc_o(alusrc),   
 	    .RegDst_o(select_dst)   
 		);
-
+always@(instr)begin
+	//$display("[Test]===> instr_op= %b, Decoder.instr= %b",instr[31:26],Decoder.instr_op_i);
+end
 ALU_Ctrl AC(
         .funct_i(instr[5:0]),   
         .ALUOp_i(aluop),   

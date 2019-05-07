@@ -42,12 +42,18 @@ always@(*) begin
 			else if (funct_i == FUNC_SUB	) 	ALU_operation = 4'b0110;	//6
 			else if (funct_i == FUNC_AND	) 	ALU_operation = 4'b0000;	//0
 			else if (funct_i == FUNC_OR  	) 	ALU_operation = 4'b0001;	//1
-			else if (funct_i == FUNC_SLT	) 	ALU_operation = 4'b0111;	//7
+			else if (funct_i == FUNC_SLT	) begin	
+					ALU_operation = 4'b0111;	//7
+					$display("[ALU_Ctr]==> SLT aluop= %b",ALU_operation);
+			end
 			//else if (funct_i == FUNC_SLLV	) 	ALU_operation = 4'b1111;//?	//15
 			else if (funct_i == FUNC_SLL	) 	ALU_operation = 4'b0101;	//5
 			//else if (funct_i == FUNC_SRLV	) 	ALU_operation = 4'b1110;	//14
 			else if (funct_i == FUNC_SRL	)	ALU_operation = 4'b0100;//?	//4
-			else if (funct_i == FUNC_NOR	) 	ALU_operation = 4'b1101;	//13
+			else if (funct_i == FUNC_NOR	)begin 	
+					ALU_operation = 4'b1100;	//12
+					$display("[ALU_Ctr]==> NOR aluop= %b",ALU_operation);
+			end
 		end
 		ALUOP_ADDI 	:begin 	ALU_operation = 4'b0010;	$display("[ALU_Ctr]==> Addi alu_op"); end
 		ALUOP_LUI 	:begin	ALU_operation = 4'b0100;	$display("");	end
@@ -59,7 +65,7 @@ always@(*) begin
 		FUNC_AND:	FURslt = 2'b00;
 		FUNC_OR :	FURslt = 2'b00;
 		FUNC_NOR:	FURslt = 2'b00;
-		FUNC_SLT:	FURslt = 2'b01;
+		FUNC_SLT:	FURslt = 2'b00;
 		//FUNC_SLLV:	FURslt = 2'b01;
 		FUNC_SLL:	FURslt = 2'b01;
 		//FUNC_SRLV:	FURslt = 2'b01;
